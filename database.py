@@ -36,3 +36,15 @@ class DataBase:
                     print(cursor.statusmessage)
                     return record
 
+        def add_user_to_DB(self):
+            pass
+
+        def delete_user_from_DB(self):
+            pass
+
+        def send_direct_msg(self):
+            pass
+
+        def read_msg_box(self):
+            pass
+

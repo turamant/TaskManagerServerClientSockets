@@ -1,5 +1,7 @@
 from datetime import datetime
 
+from users import User
+
 
 class Server:
     @staticmethod
@@ -49,6 +51,13 @@ class Server:
             uptime = str(now - self.start_time)
             return uptime[:-7]
 
+        # LOGIN
+        def create_user(slef, data):
+            userdata = data.split(":")
+            if len(userdata) == 3 and userdata[2].upper() in ["USER", "ADMIN"]:
+                return User(userdata[0], userdata[1], userdata[2])
+            return None
+
         # HANDLERS
         def show_server_info(self, *args, **kwargs):
             return "info", f"{self.version} | created: {self.created}"
@@ -62,4 +71,21 @@ class Server:
 
         def show_server_uptime(self, *args, **kwargs):
             return "uptime", self.server_uptaime()
+
+        def create_new_user(self, db, logged_user, conn):
+            if logged_user.rights == "ADMIN":
+                self.send_msg(conn, "Create: Enter -> username:password:rights")
+                recv = self.recv_msg(conn)
+                user = self.create_user(recv)
+
+                if user:
+                    if db.add_user_to_DB(user.get_user_data()):
+                        print("DataBase updated:" + "\n", db.show_data("SELECT * FROM users"))
+                        return user.username, user.password
+                    return "ERROR", f"{user.username} EXISTS !"
+                else:
+                    return "ERROR", "Invalid data"
+            return "ERROR", "Permission denied"
+
+
 
