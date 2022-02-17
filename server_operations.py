@@ -10,6 +10,12 @@ class Server:
     def recv_msg(conn, buffer=1024, coder="utf-8"):
         return conn.recv(buffer).decode(coder)
 
+    @staticmethod
+    def server_created_date():
+        dt = datetime.now()
+        dt = dt.strftime("%d/%m/%Y %H:%M:%S")
+        return dt
+
     def __init__(self):
         self.created = Server.server_created_date()
         self.start_time = datetime.now()
