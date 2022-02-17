@@ -2,9 +2,10 @@ import json
 import socket
 
 from server_operations import Server
+from services import initialize_PostgresDB
 
 server = Server()
-db = db_engine()
+db = initialize_PostgresDB()
 HOST = "127.0.0.1"
 PORT = 8001
 
