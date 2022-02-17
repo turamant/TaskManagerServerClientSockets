@@ -52,7 +52,7 @@ class Server:
             return uptime[:-7]
 
         # LOGIN
-        def create_user(slef, data):
+        def create_user(self, data):
             userdata = data.split(":")
             if len(userdata) == 3 and userdata[2].upper() in ["USER", "ADMIN"]:
                 return User(userdata[0], userdata[1], userdata[2])
