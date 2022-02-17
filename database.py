@@ -1,5 +1,5 @@
-import psycopg2 as ps2
-
+import psycopg2
+from tabulate import tabulate
 
 
 class DataBase:
@@ -9,10 +9,20 @@ class DataBase:
         self.host = host
         self.port = port
         self.database = database
-        self.connection = ps2.connect(
+        self.connection = psycopg2.connect(
             user=self.db_user,
             password=self.password,
             host=self.host,
             port=self.port,
             database=self.database,
         )
+
+        def show_data(self, query):
+            with self.connection:
+                with self.connection.cursor() as cursor:
+                    cursor.execute(query)
+                    records = cursor.fetchall()
+                    headers = [head[0] for head in cursor.description]
+                    table = tabulate(records, headers, tablefmt="psql")
+                    return table
+
