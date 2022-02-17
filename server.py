@@ -30,7 +30,7 @@ class Server:
             "stop": self.connection_closed,
         }
 
-        def server_uptaime(self):
+        def server_uptime(self):
             now = datetime.now()
             uptime = str(now - self.start_time)
             return uptime[:-7]
