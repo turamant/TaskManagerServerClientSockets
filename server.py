@@ -29,3 +29,11 @@ class Server:
             "clear": self.clear_user_box,
             "stop": self.connection_closed,
         }
+
+        # HANDLERS
+        def show_server_info(self, *args, **kwargs):
+            return "info", f"{self.version} | created: {self.created}"
+
+        def show_server_commands(self, *args, **kwargs):
+            return "help", self.commands
+
