@@ -46,3 +46,6 @@ class Server:
             self.send_msg(conn, "CONNECTION CLOSED")
             print("CONNECTION CLOSED")
 
+        def show_server_uptime(self, *args, **kwargs):
+            return "uptime", self.server_uptaime()
+
