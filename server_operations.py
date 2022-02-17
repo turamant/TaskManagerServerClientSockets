@@ -2,6 +2,14 @@ from datetime import datetime
 
 
 class Server:
+    @staticmethod
+    def send_msg(conn, msg, coder="utf-8"):
+        conn.send(msg.encode(coder))
+
+    @staticmethod
+    def recv_msg(conn, buffer=1024, coder="utf-8"):
+        return conn.recv(buffer).decode(coder)
+
     def __init__(self):
         self.created = Server.server_created_date()
         self.start_time = datetime.now()
