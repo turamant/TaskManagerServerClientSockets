@@ -37,3 +37,7 @@ class Server:
         def show_server_commands(self, *args, **kwargs):
             return "help", self.commands
 
+        def connection_closed(self, *args, conn):
+            self.send_msg(conn, "CONNECTION CLOSED")
+            print("CONNECTION CLOSED")
+
