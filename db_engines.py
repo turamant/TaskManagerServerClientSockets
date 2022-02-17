@@ -1,9 +1,6 @@
 import psycopg2
 
 
-
-
-
 class PostgresDB:
     def __init__(self, db_user, password, host, port, database):
         self.db_user = db_user

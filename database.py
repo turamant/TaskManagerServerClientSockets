@@ -26,3 +26,13 @@ class DataBase:
                     table = tabulate(records, headers, tablefmt="psql")
                     return table
 
+        def get_user(self, username):
+            """return user tuple if user exists"""
+            with self.connection:
+                with self.connection.cursor() as cursor:
+                    query = "SELECT * FROM users WHERE username = %s"
+                    cursor.execute(query, (username,))
+                    record = cursor.fetchone()
+                    print(cursor.statusmessage)
+                    return record
+
